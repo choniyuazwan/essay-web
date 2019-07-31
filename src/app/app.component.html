@@ -3,9 +3,14 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <p>key</p>
   <input [(ngModel)]="key" placeholder="type here"/> 
   <button (click)="search()">search</button>
-  <p>{{key}}</p>
+  <p>
+    <button *ngFor='let item of similar' (click)="fill(item.value)">{{item.value}}</button>
+  </p>
+  <div *ngFor='let item of translation'>
+    <p>{{item.surah}} : {{item.ayat}}
+      <br> {{item.text}}</p>
+  </div>
 </div>
 <router-outlet></router-outlet>

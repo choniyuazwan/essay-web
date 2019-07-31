@@ -9,22 +9,34 @@ import { QuranService } from './service/quran.service';
 export class AppComponent{
   constructor(private quranService: QuranService) { }
 
-  ngOnInit() {
-    alert('dllasdlkal')
-  }
-
   title = 'essay';
-  key = 'islam';
+  key = '';
+
+  similar: any
+  translation: any
 
   search() {
     this.quranService.getSimilar(this.key).subscribe(
       response => {
-        if (response) {
-          alert('success');
-        } else {
-          alert('failed')
+        if(response) {
+          this.similar = response
+          console.log(this.similar)
         }
       }
     );
+
+    this.quranService.getTranslation(this.key).subscribe(
+      response => {
+        if(response) {
+          this.translation = response
+          console.log(this.translation)
+        }
+      }
+    );
+  }
+
+  fill(newKey) {
+    this.key = newKey
+    this.search() 
   }
 }
