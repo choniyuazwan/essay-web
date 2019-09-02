@@ -14,6 +14,7 @@ export class AppComponent{
 
   similar: any
   translation: any
+  condition: boolean = true
 
   search() {
     this.quranService.getSimilar(this.key).subscribe(
@@ -30,6 +31,12 @@ export class AppComponent{
         if(response) {
           this.translation = response
           console.log(this.translation)
+          if(this.translation instanceof Array) {
+            this.condition = true
+          } else {
+            this.condition = false
+          }
+          console.log('condition', this.condition)
         }
       }
     );

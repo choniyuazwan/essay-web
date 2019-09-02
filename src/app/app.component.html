@@ -1,16 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <h3>
+    Search anything in Quran
+  </h3>
   <input [(ngModel)]="key" placeholder="type here"/> 
   <button (click)="search()">search</button>
   <p>
     <button *ngFor='let item of similar' (click)="fill(item.value)">{{item.value}}</button>
   </p>
-  <div *ngFor='let item of translation'>
-    <p>{{item.surah}} : {{item.ayat}}
-      <br> {{item.text}}</p>
+  
+  <div *ngIf="condition; else elseBlock">
+    <div *ngFor='let item of translation'>
+      <p>{{item.surah}} : {{item.ayat}}
+        <br> {{item.text}}</p>
+    </div>
   </div>
+
+  <ng-template #elseBlock>
+    Translation is not found
+  </ng-template>
 </div>
 <router-outlet></router-outlet>
